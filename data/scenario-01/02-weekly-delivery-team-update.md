@@ -43,7 +43,7 @@ Continue Fund Transfer integration and testing, progress Bill Payment developmen
 
 - Development is approximately 65% complete.
 - Most committed work is progressing as expected.
-- One story requires additional clarification regarding recurring-payment rules.
+- One story is awaiting Product Owner clarification regarding recurring-payment rules.
 - The team currently expects to maintain the September 18 production target.
 
 ---
@@ -94,10 +94,10 @@ Continue Fund Transfer integration and testing, progress Bill Payment developmen
 
 | Action | Owner | Due Date |
 |---|---|---|
-| Follow up with vendor on beneficiary-validation API availability | Sayali Bhave | August 13, 2026 |
+| Obtain confirmed beneficiary API availability date from vendor | Sayali Bhave | August 10, 2026 — Overdue |
 | Assess Fund Transfer schedule impact if API remains unavailable | Backend Lead | August 14, 2026 |
 | Retest Transaction History defects | QA Lead | August 17, 2026 |
-| Clarify Bill Payment recurring-payment requirements | Business Analyst | August 13, 2026 |
+| Confirm Bill Payment recurring-payment requirements | Product Owner | August 13, 2026 |
 | Investigate transaction-event delays | Backend / API Team | August 14, 2026 |
 
 ---

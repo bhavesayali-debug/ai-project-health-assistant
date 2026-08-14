@@ -200,3 +200,114 @@ A lower-cost model may later be used if it meets the required quality threshold.
 Model selection should be evidence-driven.
 
 The project should first establish a reliable quality baseline and then optimize cost and latency without materially reducing project-health assessment quality.
+
+---
+
+# Decision 4 — Project Knowledge Store
+
+## Selected Technology
+
+**OpenAI Vector Store**
+
+---
+
+## Purpose
+
+The Project Knowledge Store will contain the project information that the AI is allowed to search when answering Project Manager questions.
+
+For Scenario 01, the vector store will contain the eight synthetic project input documents located under:
+
+`data/scenario-01/`
+
+The evaluation ground-truth files will not be uploaded to the project knowledge store.
+
+---
+
+## Why OpenAI Vector Store
+
+OpenAI Vector Store provides a managed knowledge base for uploaded project documents.
+
+For the MVP, it reduces the amount of infrastructure that must be built and maintained separately.
+
+The vector store can hold:
+
+- Project documents
+- Searchable document content
+- File attributes / metadata
+- Processed chunks used during retrieval
+
+This allows the prototype to focus primarily on project-health reasoning and evaluation rather than building a separate vector-database infrastructure.
+
+---
+
+# Decision 5 — Evidence Retrieval
+
+## Selected Technology
+
+**OpenAI File Search**
+
+File Search will be used with the OpenAI Responses API to retrieve relevant project evidence from the vector store.
+
+---
+
+## Retrieval Flow
+
+When the Project Manager asks a question such as:
+
+**"What is the current status of this project?"**
+
+the application will:
+
+1. Receive the PM question.
+2. Search the project vector store.
+3. Retrieve relevant project evidence.
+4. Provide the retrieved evidence to the reasoning model.
+5. Apply the project-health reasoning instructions.
+6. Produce the structured project-health result.
+
+---
+
+## Search Approach
+
+The MVP will use the search capabilities provided by OpenAI File Search.
+
+The retrieval layer should be capable of finding relevant evidence even when the wording in the PM question does not exactly match the wording in the source document.
+
+Example:
+
+PM question:
+
+**"Is Fund Transfer at risk?"**
+
+Relevant evidence may exist under terms such as:
+
+- Beneficiary-validation dependency
+- SIT blocker
+- Vendor access
+- Testing unavailable
+- September 4 production target
+
+The retrieval system should bring these related pieces of project evidence together for the reasoning model.
+
+---
+
+## File Metadata
+
+Each uploaded project source should retain useful metadata where practical.
+
+Initial file-level metadata should include:
+
+- Scenario ID
+- Project name
+- Source type
+- Source date
+
+Example:
+
+```json
+{
+  "scenario_id": "scenario-01",
+  "project": "Online Banking Upgrade Project",
+  "source_type": "meeting_notes",
+  "source_date": "2026-08-11"
+}
